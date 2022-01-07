@@ -40,9 +40,11 @@ router.post("/notes", function(req, res){
     }
     //add new note entry to the db.json file
     notes.push(req.body);
-    writeToDB(notes);
+    writeFile(notes);
     //return the newly entered note.
     res.json(req.body);
+
+    console.log(req.body.title + " saved to notes.")
 });
 
 //delete api route to remove a note
@@ -63,7 +65,8 @@ router.delete("/notes/:id", function(req, res){
         }
     }
     // re-write db without deleted note
-    writeToDB(notes);
+    writeFile(notes);
+    console.log("note " + id + " deleted from notes.")
 });
 
 module.exports = router;
