@@ -11,7 +11,7 @@ DELETE /api/notes/:id should receive a query parameter containing the id of a no
 
 */
 const router = require('express').Router();
-const notes = require('../db/db');
+const notes = require('../db/db.json');
 const fs = require('fs');
 
 //function to write data to the db.json file
@@ -26,12 +26,13 @@ var writeFile = (notes) => {
 }
 
 //get api route to return all notes
-router.get("/notes", function(req, res){
+router.get("/notes", (req, res) => {
     res.json(notes);
+    console.log("Here are your current notes: " + JSON.stringify(notes))
 });
 
 // post api route to add a new note
-router.post("/notes", function(req, res){
+router.post("/notes", (req, res) => {
 //Create a unique ID for each note
     if (notes.length == 0){
         req.body.id = "0";
@@ -48,7 +49,7 @@ router.post("/notes", function(req, res){
 });
 
 //delete api route to remove a note
-router.delete("/notes/:id", function(req, res){
+router.delete("/notes/:id", (req, res) => {
     // take ID parameter and convert it to a string
     let id = req.params.id.toString();
     
@@ -69,4 +70,4 @@ router.delete("/notes/:id", function(req, res){
     console.log("note " + id + " deleted from notes.")
 });
 
-module.exports = router;
+module.exports = router, writeFile;
