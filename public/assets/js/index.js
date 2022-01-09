@@ -1,3 +1,4 @@
+//this file was written as part of the starter code for this assignment.
 let noteTitle;
 let noteText;
 let saveNoteBtn;
